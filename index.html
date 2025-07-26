@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydra Guard - Smart Reminder System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <span class="logo-icon">💧</span> Hydra<span>Guard</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Dashboard</a></li>
+                    <li><a href="#">Reminders</a></li>
+                    <li><a href="#">Analytics</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <main>
+            <div class="left-panel">
+                <h2>Manage Your Reminders</h2>
+                <div class="reminder-form">
+                    <div class="form-group">
+                        <label for="reminder-title">Reminder Title</label>
+                        <input type="text" id="reminder-title" placeholder="Enter reminder title">
+                    </div>
+                    <div class="form-group">
+                        <label for="reminder-time">Time</label>
+                        <input type="datetime-local" id="reminder-time">
+                    </div>
+                    <div class="form-group">
+                        <label for="reminder-priority">Priority</label>
+                        <select id="reminder-priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reminder-repeat">Repeat</label>
+                        <select id="reminder-repeat">
+                            <option value="never">Never</option>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reminder-notes">Notes</label>
+                        <textarea id="reminder-notes" rows="3" placeholder="Add some notes..."></textarea>
+                    </div>
+                    <button id="add-reminder-btn">Add Reminder</button>
+                </div>
+
+                <h2>Your Upcoming Reminders</h2>
+                <ul class="reminder-list" id="reminder-list">
+                    <!-- Reminder items will be added dynamically with JavaScript -->
+                </ul>
+
+                <div class="water-tracker">
+                    <h3>Daily Hydration Tracker</h3>
+                    <p>Target: 2000 ml / Current: 1200 ml</p>
+                    <div class="water-progress">
+                        <div class="water-progress-bar" id="water-progress-bar"></div>
+                    </div>
+                    <div class="water-actions">
+                        <button class="button-secondary" id="add-water-btn">Add Water (200ml)</button>
+                        <button class="button-secondary" id="reset-water-btn">Reset</button>
+                    </div>
+                </div>
+
+                <div class="features">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">⏰</div>
+                        <div class="feature-title">Smart Scheduling</div>
+                        <p>Our AI analyzes your patterns to suggest optimal restroom times throughout the day.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">📱</div>
+                        <div class="feature-title">Multi-Device Support</div>
+                        <p>Get reminders on all your devices and never miss important notifications.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">👴</div>
+                        <div class="feature-title">Caregiver Mode</div>
+                        <p>Allow family members and caregivers to monitor and manage reminders remotely.</p>
+                    </div>
+                </div>
+
+                <div class="stats-banner">
+                    <div class="stat">
+                        <div class="stat-number">87%</div>
+                        <div class="stat-label">Reduced Accidents</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">92%</div>
+                        <div class="stat-label">User Satisfaction</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">5000+</div>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="reminder-widget">
+                    <h2>Today's Schedule</h2>
+                    <div id="today-reminders">
+                        <p>No reminders for today yet.</p>
+                    </div>
+                </div>
+
+                <div class="chatbot-widget">
+                    <h2>Hydra Assistant</h2>
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message bot-message">
+                            Hello! I'm your Hydra Assistant. How can I help you manage your reminders today?
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chat-input" placeholder="Ask me about reminders...">
+                        <button id="send-chat-btn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="reminder-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <h2>Edit Reminder</h2>
+            <div class="form-group">
+                <label for="edit-title">Title</label>
+                <input type="text" id="edit-title">
+            </div>
+            <div class="form-group">
+                <label for="edit-time">Time</label>
+                <input type="datetime-local" id="edit-time">
+            </div>
+            <div class="form-group">
+                <label for="edit-priority">Priority</label>
+                <select id="edit-priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="edit-notes">Notes</label>
+                <textarea id="edit-notes" rows="3"></textarea>
+            </div>
+            <button id="save-edit-btn">Save Changes</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">Reminder added successfully!</div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Hydra Guard</h3>
+                    <p>Hydra Guard is a smart reminder system designed to improve the quality of life for elderly and physically challenged individuals.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">📘</a>
+                        <a href="#" class="social-icon">📱</a>
+                        <a href="#" class="social-icon">📷</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Email: info@hydraguard.com</li>
+                        <li>Phone: +1 (555) 123-4567</li>
+                        <li>Address: 123 Health Street, Wellness City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hydra Guard by Bit Byte Drillers. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
